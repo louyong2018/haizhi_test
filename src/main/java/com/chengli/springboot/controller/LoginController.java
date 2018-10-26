@@ -1,5 +1,7 @@
 package com.chengli.springboot.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 public class LoginController {
+
+    Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @RequestMapping("/")
     public String index() {
@@ -21,8 +25,19 @@ public class LoginController {
     }
 
     @RequestMapping("/getLogin")
-    public String getLogin(){return "登录成功";}
+    public String getLogin(HttpSession session){
 
+        logger.debug("登录成功==="+session.getId());
+        return "登录成功";}
+
+    @PreAuthorize("hasAuthority('TEST')")
+    @RequestMapping("/logout")
+    public String getLogout(HttpSession session){
+        logger.debug("登出成功==="+session.getId());
+        return "登出成功";
+    }
+
+    @PreAuthorize("hasAuthority('TEST1')")
     @RequestMapping("/hello")
     public String hello() {
         return "不验证哦";

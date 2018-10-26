@@ -3,8 +3,10 @@ package com.chengli.springboot.security;
 import com.chengli.springboot.custom.CasUserDetailsService;
 import com.chengli.springboot.properties.CasProperties;
 import org.jasig.cas.client.session.SingleSignOutFilter;
+import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
 import org.jasig.cas.client.validation.Cas20ServiceTicketValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.cas.ServiceProperties;
@@ -67,7 +69,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		//http.csrf().disable();
 	}
-	
+
+
+//	@Bean
+//	public ServletListenerRegistrationBean<SingleSignOutHttpSessionListener> serssionListenerBean(){
+//		ServletListenerRegistrationBean<SingleSignOutHttpSessionListener>
+//				sessionListener = new ServletListenerRegistrationBean<SingleSignOutHttpSessionListener>();
+//		sessionListener.setEnabled(true);
+//		sessionListener.setListener(new SingleSignOutHttpSessionListener());
+//		return sessionListener;
+//	}
+
 	/**认证的入口*/
 	@Bean
 	public CasAuthenticationEntryPoint casAuthenticationEntryPoint() {

@@ -1,0 +1,37 @@
+server:
+  port: 18001
+
+spring:
+  ## \u89E3\u51B3\u4E2D\u6587\u4E71\u7801
+    http:
+        encoding:
+          charset: UTF-8
+          enabled: true
+          force: true
+
+#日志
+logging:
+  config: classpath:log4j2.xml
+
+#CAS服务地址
+#cas.server.host.url=http://localhost:8888/cas
+cas:
+  server:
+    host:
+      url: http://47.100.173.115:9090/cas
+#CAS服务登录地址
+      login_url: ${cas.server.host.url}/login
+#CAS服务登出地址
+      logout_url: ${cas.server.host.url}/logout?service=${app.server.host.url}
+#应用访问地址
+app:
+  server:
+    host:
+      url: http://127.0.0.1:${server.port}
+#应用登录地址
+  login.url: /login
+#应用登出地址
+  logout.url: /logout
+
+
+
